@@ -1,5 +1,11 @@
-FROM python:3.7-slim
+FROM python:3.7
 MAINTAINER Lynn Scheinman <lynn.scheinman@sap.com>
+
+RUN apt-get update && apt-get install -qq -y \
+  build-essential libpq-dev --no-install-recommends
+
+RUN apt-get install default-jre -y
+RUN apt-get install default-jdk -y
 
 ENV INSTALL_PATH /fioriapp
 RUN mkdir -p $INSTALL_PATH
