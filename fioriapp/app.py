@@ -14,6 +14,8 @@ from fioriapp.extensions import (
     login_manager
 )
 
+from fioriapp.blueprints.home import home
+
 CELERY_TASK_LIST = [
     'fioriapp.blueprints.contact.tasks',
     'fioriapp.blueprints.user.tasks',
@@ -53,6 +55,8 @@ def create_app(settings_override=None):
     :param settings_override: Override settings
     :return: Flask app
     """
+
+    '''
     app = Flask(__name__, instance_relative_config=True)
 
     app.config.from_object('config.settings')
@@ -62,10 +66,15 @@ def create_app(settings_override=None):
         app.config.update(settings_override)
 
     app.logger.setLevel(app.config['LOG_LEVEL'])
+    '''
+    app = Flask(__name__)
+    #app.config.from_object('config.settings')
+    #app.config.from_pyfile('settings.py', silent=True)
+    app.register_blueprint(home)
 
     middleware(app)
-    error_templates(app)
-    exception_handler(app)
+    #error_templates(app)
+    #exception_handler(app)
     extensions(app)
     #authentication(app, User)
 
