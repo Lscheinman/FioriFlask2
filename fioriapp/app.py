@@ -15,6 +15,7 @@ from fioriapp.extensions import (
 )
 
 from fioriapp.blueprints.home import home
+from fioriapp.blueprints.dashboard import dashboard
 
 CELERY_TASK_LIST = [
     'fioriapp.blueprints.contact.tasks',
@@ -71,6 +72,7 @@ def create_app(settings_override=None):
     #app.config.from_object('config.settings')
     #app.config.from_pyfile('settings.py', silent=True)
     app.register_blueprint(home)
+    app.register_blueprint(dashboard)
 
     middleware(app)
     #error_templates(app)
